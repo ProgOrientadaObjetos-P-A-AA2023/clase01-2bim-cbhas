@@ -8,6 +8,7 @@ public class Empresa {
     private double costoBienesInmuebles;
     private double costoVehiculos;
     private double costoTotalBienes;
+    private double costoTotalPagoPredio;
 
     public Empresa(String n, Edificio[] e, Vehiculo[] v) {
         nombre = n;
@@ -49,6 +50,15 @@ public class Empresa {
         costoTotalBienes = costoBienesInmuebles + costoVehiculos;
     }
 
+    public void calcularCostoTotalPagoPredio() {
+        double suma = 0;
+        for (int i = 0; i < edificios.length; i++) {
+            suma = suma + edificios[i].obtenerCostoPredio();
+        }
+
+        costoTotalPagoPredio = suma;
+    }
+
     public String obtenerNombre() {
         return nombre;
     }
@@ -71,6 +81,10 @@ public class Empresa {
 
     public double obtenerCostoTotalBienes() {
         return costoTotalBienes;
+    }
+
+    public double obtenerCostoTotalPagoPredio() {
+        return costoTotalPagoPredio;
     }
 
     @Override
@@ -98,20 +112,21 @@ public class Empresa {
         String reporte = String.format("%s\nLista de Edificio\n",
                 obtenerNombre());
         for (int i = 0; i < edificios.length; i++) {
-            reporte = String.format("%s%d. %s (%.2f)\n",
+            reporte = String.format("%s%d. %s \n\t- Costo: ($%.2f)\n\t- Costo Predio: ($%.2f) \n",
                     reporte,
                     i + 1,
                     edificios[i].obtenerNombre().toUpperCase(),
-                    edificios[i].obtenerCosto());
+                    edificios[i].obtenerCosto(),
+                    edificios[i].obtenerCostoPredio());
         }
 
-        reporte = String.format("%sTotal de inmuebles: %.2f\n",
+        reporte = String.format("%sTotal de inmuebles: $%.2f\n",
                 reporte,
                 costoBienesInmuebles);
 
         reporte = String.format("%s\nLista de Vehiculos\n", reporte);
         for (int i = 0; i < vehiculos.length; i++) {
-            reporte = String.format("%s%d. %s, %s (%.2f)\n",
+            reporte = String.format("%s%d. %s\n\t- Matricula: %s\n\t- Valor: ($%.2f)\n",
                     reporte,
                     i + 1,
                     vehiculos[i].obtenerTipo(),
@@ -119,10 +134,13 @@ public class Empresa {
                     vehiculos[i].obtenerValor());
         }
 
-        reporte = String.format("%sTotal de vehículos: %.2f\n\nTotal bienes: %.2f",
+        reporte = String.format("%sTotal de vehículos: $%.2f\n\n"
+                + "Total bienes: $%.2f\n"
+                + "Total predio: $%.2f\n",
                 reporte,
                 costoVehiculos,
-                costoTotalBienes);
+                costoTotalBienes,
+                costoTotalPagoPredio);
 
         return reporte;
     }

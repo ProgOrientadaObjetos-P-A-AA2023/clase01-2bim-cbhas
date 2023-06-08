@@ -8,12 +8,16 @@ public class Ejecutor {
 
         Edificio edf1 = new Edificio("Edificio central");
         edf1.establecerCostos(20000);
+        edf1.calcularCostoPredio();
         Edificio edf2 = new Edificio("Edificio norte");
         edf2.establecerCostos(30000);
+        edf2.calcularCostoPredio();
         Edificio edf3 = new Edificio("Edificio sur");
         edf3.establecerCostos(10000);
+        edf3.calcularCostoPredio();
         Edificio edf4 = new Edificio("Edificio secundario");
         edf4.establecerCostos(5000);
+        edf4.calcularCostoPredio();
 
         Vehiculo v1 = new Vehiculo("Auto", "LBB0011", 10000);
         Vehiculo v2 = new Vehiculo("Camioneta", "LCB0011", 20000);
@@ -30,7 +34,7 @@ public class Ejecutor {
         miempresa.calcularCostosBienesInmuebles();
         miempresa.calcularCostoVehiculos();
         miempresa.calcularCostoTotalBienes();
-
+        miempresa.calcularCostoTotalPagoPredio();
         System.out.printf("%s\n", miempresa);
     }
 }
